@@ -16,8 +16,8 @@ WORKDIR /src
 # Copy the project to the container so Bundler can install all the gems.
 COPY ./ /src/
 
-# Install Bundler.
-RUN gem install bundler
+# Install the same version of Bundler that was used to create Gemfile.lock.
+RUN gem install bundler:$(tail -n1 Gemfile.lock | awk '{$1=$1};1')
 
 # Install the gems for every group, do not vendor the gems, and allow use of all CPU cores for parallel installations.
-# RUN bundle install --without="" --no-deployment --jobs=`nproc`
+RUN bundle install --without="" --no-deployment --jobs=`nproc`

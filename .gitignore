@@ -2,3 +2,10 @@
 /.idea/
 /.rakeTasks
 /.ruby-version
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
