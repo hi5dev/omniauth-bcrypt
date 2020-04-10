@@ -1,0 +1,21 @@
+# Depends on Docker Engine version 18.06.0 or higher.
+# https://docs.docker.com/compose/compose-file/
+version: "3.7"
+
+services:
+  ruby:
+    build:
+      context: "."
+      dockerfile: "./Dockerfile"
+
+    # Keep the container active for IDEs in a way that allows it to gracefully shutdown.
+    command: "ruby -e\"trap('INT') { exit(0) }; while true; sleep(0.1); end\""
+
+    # Bind the container's STDIN to the host's.
+    stdin_open: true
+
+    # Allocate a pseudo-tty.
+    tty: true
+
+    # Mount the current directory as /src in the container.
+    volumes: ["./:/src"]
